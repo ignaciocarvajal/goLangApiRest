@@ -18,7 +18,7 @@ const engine_sql string = "mysql"
 // en variables de entorno
 const username string = "root"
 const password string = "root"
-const database string = "userdummy"
+const database string = "bank"
 
 func InitializeDatabase() {
 	connection = ConnectORM(CreateStringConnection())
@@ -47,6 +47,8 @@ func GetUser(id string) structure.User {
 	if err != nil {
 		log.Println(err)
 	}
+
+	log.Println(user)
 	return user
 }
 

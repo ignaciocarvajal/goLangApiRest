@@ -48,8 +48,37 @@ func GetUser(id string) structure.User {
 		log.Println(err)
 	}
 
-	log.Println(user)
 	return user
+}
+
+func CreateUser(user structure.User) structure.User {
+	connection.Create(&user)
+	return user
+}
+
+func UpdateUser(id string, user structure.User) structure.User {
+	currentUser := structure.User{}
+	err := connection.Find(&currentUser, id)
+	if err != nil {
+		log.Println(err)
+	}
+
+	currentUser.UserName = user.UserName
+	currentUser.FirstName = user.FirstName
+	currentUser.LastName = user.LastName
+
+	connection.Save(&currentUser)
+
+	return currentUser
+}
+
+func DeleteUser(id string) {
+	currentUser := structure.User{}
+	err := connection.Find(&currentUser, id)
+	if err != nil {
+		log.Println(err)
+	}
+	connection.Delete(&currentUser)
 }
 
 func CreateStringConnection() string {
